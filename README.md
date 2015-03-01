@@ -1,7 +1,11 @@
 Luposdate-Nonstandard-Endpoint
 ==============================
 
-This is an extension to the standard endpoint of [LUPOSDATE](https://github.com/luposdate/luposdate). Run the java program lupos.endpoint.ExtendedEndpoint to start the LUPOSDATE SPARQL endpoint. The standard endpoint serves an HTML form under `http://localhost:8080` which you can use to run a SPARQL query against the endpoint.
+This is an extension to the standard endpoint of
+[LUPOSDATE](https://github.com/luposdate/luposdate). Follow the
+[instructions](#build-and-run) to build and run. The standard endpoint serves an
+HTML form under `http://localhost:8080` which you can use to run a SPARQL query
+against the endpoint.
 
 **It will create an index on the first run or when run with command line argument `--rebuild-index`.**
 
@@ -11,12 +15,23 @@ These can be used to perform offline queries, retrieve ASTs and operator graphs.
 
 Contents:
 
+* [Build and Run](#build-and-run)
 * [POST to /nonstandard/sparql](#post-to-nonstandardsparql)
 * [POST to /nonstandard/sparql/info](#post-to-nonstandardsparqlinfo)
 * [POST to /nonstandard/sparql/graphs](#post-to-nonstandardsparqlgraphs)
 * [POST to /nonstandard/rif](#post-to-nonstandardrif)
 * [POST to /nonstandard/rif/info](#post-to-nonstandardrifinfo)
 * [POST to /nonstandard/rif/graphs](#post-to-nonstandardrifgraphs)
+
+Build and Run
+=============
+
+Before you start, make sure that you have a JDK and [Maven](http://maven.apache.org/) installed.
+
+1. Download source
+2. Run `mvn package`
+3. Run `java -jar target/luposdateExtendedEndpoint-0.1-SNAPSHOT-jar-with-dependencies.jar`
+
 
 POST to /nonstandard/sparql
 ===========================
