@@ -1,5 +1,5 @@
-luposdate\_js\_client
-=====================
+Luposdate-Nonstandard-Endpoint
+==============================
 
 This is an extension to the standard endpoint of [LUPOSDATE](https://github.com/luposdate/luposdate). Run the java program lupos.endpoint.ExtendedEndpoint to start the LUPOSDATE SPARQL endpoint. The standard endpoint serves an HTML form under `http://localhost:8080` which you can use to run a SPARQL query against the endpoint.
 
@@ -8,6 +8,15 @@ This is an extension to the standard endpoint of [LUPOSDATE](https://github.com/
 This extension provides a set of new endpoints, which can be accessed via following routes: `/nonstandard/sparql`, `/nonstandard/sparql/info`, `/nonstandard/sparql/graphs`, `/nonstandard/rif`, `/nonstandard/rif/info` and `/nonstandard/rif/graphs`.
 
 These can be used to perform offline queries, retrieve ASTs and operator graphs. In general it's a good idea to build up a request for `nonstandard/sparql` or `nonstandard/rif` and send the exact same request to `info` and `graphs` routes to retrieve more information. Not needed parameters will be ignored. All extensions are mainly intended as a backend for [Semantic Web education tools](https://github.com/hauptbenutzer/luposdate-spa-client).
+
+Contents:
+
+* [POST to /nonstandard/sparql](#post-to-nonstandardsparql)
+* [POST to /nonstandard/sparql/info](#post-to-nonstandardsparqlinfo)
+* [POST to /nonstandard/sparql/graphs](#post-to-nonstandardsparqlgraphs)
+* [POST to /nonstandard/rif](#post-to-nonstandardrif)
+* [POST to /nonstandard/rif/info](#post-to-nonstandardrifinfo)
+* [POST to /nonstandard/rif/graphs](#post-to-nonstandardrifgraphs)
 
 POST to /nonstandard/sparql
 ===========================
