@@ -1,36 +1,23 @@
-luposdate_js_client
-===================
+luposdate\_js\_client
+=====================
 
-This is an extension to the standard endpoint of
-[LUPOSDATE](https://github.com/luposdate/luposdate). Run the java program
-lupos.endpoint.ExtendedEndpoint to start the LUPOSDATE SPARQL endpoint. The standard
-endpoint serves an HTML form under `http://localhost:8080` which you can use to
-run a SPARQL query against the endpoint.
+This is an extension to the standard endpoint of [LUPOSDATE](https://github.com/luposdate/luposdate). Run the java program lupos.endpoint.ExtendedEndpoint to start the LUPOSDATE SPARQL endpoint. The standard endpoint serves an HTML form under `http://localhost:8080` which you can use to run a SPARQL query against the endpoint.
 
-**It will create an index on the first run or when run with command line
-  argument `--rebuild-index`.**
+**It will create an index on the first run or when run with command line argument `--rebuild-index`.**
 
-This extension provides a set of new endpoints, which can be accessed via
-following routes: `/nonstandard/sparql`, `/nonstandard/sparql/info`,
-`/nonstandard/sparql/graphs`, `/nonstandard/rif`, `/nonstandard/rif/info` and
-`/nonstandard/rif/graphs`.
+This extension provides a set of new endpoints, which can be accessed via following routes: `/nonstandard/sparql`, `/nonstandard/sparql/info`, `/nonstandard/sparql/graphs`, `/nonstandard/rif`, `/nonstandard/rif/info` and `/nonstandard/rif/graphs`.
 
-These can be used to perform offline queries, retrieve ASTs and operator graphs.
-In general it's a good idea to build up a request for `nonstandard/sparql` or
-`nonstandard/rif` and send the exact same request to `info` and `graphs` routes
-to retrieve more information. Not needed parameters will be ignored. All
-extensions are mainly intended as a backend for
-[Semantic Web education tools](https://github.com/hauptbenutzer/luposdate-spa-client).
+These can be used to perform offline queries, retrieve ASTs and operator graphs. In general it's a good idea to build up a request for `nonstandard/sparql` or `nonstandard/rif` and send the exact same request to `info` and `graphs` routes to retrieve more information. Not needed parameters will be ignored. All extensions are mainly intended as a backend for [Semantic Web education tools](https://github.com/hauptbenutzer/luposdate-spa-client).
 
 POST to /nonstandard/sparql
 ===========================
 
 Returns the result of a SPARQL query running against provided RDF data.
 
-
 Request body must be a JSON object. Two short examples:
 
-## Minimal configuration ##
+Minimal configuration
+---------------------
 
     Request
 
@@ -85,7 +72,8 @@ Request body must be a JSON object. Two short examples:
         }
     }
 
-## Alternative output formats ##
+Alternative output formats
+--------------------------
 
     Request
 
@@ -149,8 +137,8 @@ Request body must be a JSON object. Two short examples:
         "
     }
 
-    
-## JSON Keys ##
+JSON Keys
+---------
 
 **query (mandatory)**
 
@@ -162,53 +150,46 @@ RDF Data to perform the query on. RDF Data must be provided in N3 format.
 
 **formats (optional)**
 
-JSON Array of Strings.\
-Valid formats are:\
-`Comma Separated Values (CSV)`, `XML with Query Triples`, `Query-Triples`,
-`JSON`, `JSON with Query-Triples`, `Tab Separated Values (TSV)`, `Colored HTML`,
-`Colored HTML with Query-Triples`, `HTML`, `XML`, `Plain`, `HTML with
-Query-Triples`\
-Aliases:\
-`text/csv`, `application/sparql-results+xml+querytriples`, `text/n3`,
-`application/sparql-results+json`,
-`application/sparql-results+json+querytriples`, `text/tsv`, `colored html`,
-`colored html with query-triples`, `html`, `application/sparql-results+xml`,
-`text/plain`, `html with query-triples`
+JSON Array of Strings.
+Valid formats are:
+`Comma Separated Values (CSV)`, `XML with Query Triples`, `Query-Triples`, `JSON`, `JSON with Query-Triples`, `Tab Separated Values (TSV)`, `Colored HTML`, `Colored HTML with Query-Triples`, `HTML`, `XML`, `Plain`, `HTML with Query-Triples`
+Aliases:
+`text/csv`, `application/sparql-results+xml+querytriples`, `text/n3`, `application/sparql-results+json`, `application/sparql-results+json+querytriples`, `text/tsv`, `colored html`, `colored html with query-triples`, `html`, `application/sparql-results+xml`, `text/plain`, `html with query-triples`
 
 **Please note that `Query-Triples` (`text/n3`) formatter is broken at the moment (02/2015)!**
 
 **evaluator (optional)**
 
-Must be one of `MemoryIndex`, `RDF3X`, `Stream`, `Jena` or `Sesame`.\
+Must be one of `MemoryIndex`, `RDF3X`, `Stream`, `Jena` or `Sesame`.
 Defaults to `MemoryIndex`
 
 **inference (optional)**
 
-Must be one of `NONE`, `RIF`, `RDFS` or `OWL2RL`.\
+Must be one of `NONE`, `RIF`, `RDFS` or `OWL2RL`.
 Defaults to `NONE`.
 
 **inferenceGeneration (optional)**
 
-Only relevant if `inference` is `RDFS` or `OWL2RL`.\
-Must be one of `GENERATED`, `GENERATEDOPT` or `FIXED`.\
+Only relevant if `inference` is `RDFS` or `OWL2RL`.
+Must be one of `GENERATED`, `GENERATEDOPT` or `FIXED`.
 Defaults to `FIXED`.
 
 **owl2rlInconsistencyCheck (optional)**
 
-Only relevant if `inference` is `OWL2RL`.\
-Must be a boolean.\
+Only relevant if `inference` is `OWL2RL`.
+Must be a boolean.
 Defaults to `false`.
 
 **rif (optional)**
 
-RIF rule set to be used for RIF inference.\
-Only relevant if `inference` is `RIF`.\
+RIF rule set to be used for RIF inference.
+Only relevant if `inference` is `RIF`.
 Defaults to `( empty string )`.
 
-## Errors ##
+Errors
+------
 
-The server usually responds with an error object describing what went wrong.
-This is not a complete list - just some examples.
+The server usually responds with an error object describing what went wrong. This is not a complete list - just some examples.
 
 **Missing RDF (400 Bad Request)**
 
@@ -286,13 +267,12 @@ For semantic errors the server issues a 200 OK response.
 POST to /nonstandard/sparql/info
 ================================
 
-Returns additional compilation information about a SPARQL query. At its best it
-will be the AST for the query, the query in core SPARQL and the AST of the core
-SPARQL query.
+Returns additional compilation information about a SPARQL query. At its best it will be the AST for the query, the query in core SPARQL and the AST of the core SPARQL query.
 
 Request body must be a JSON object.
 
-## Minimal configuration ##
+Minimal configuration
+---------------------
 
     Request
 
@@ -416,7 +396,8 @@ Request body must be a JSON object.
         "coreSPARQL": "SELECT *\n\nWHERE \n{\n?s ?p ?o .\n} LIMIT 10\n"
     }
 
-## Alternative output formats ##
+Alternative output formats
+--------------------------
 
     Request
 
@@ -605,7 +586,8 @@ Request body must be a JSON object.
         "coreSPARQL": "SELECT *\n\nWHERE \n{\n?s ?p ?o .\n} LIMIT 10\n"
     }
 
-## JSON Keys ##
+JSON Keys
+---------
 
 **query (mandatory)**
 
@@ -613,16 +595,15 @@ Query must be a valid SPARQL query
 
 **evaluator (optional)**
 
-Must be one of `MemoryIndex`, `RDF3X`, `Stream`, `Jena` or `Sesame`.\
+Must be one of `MemoryIndex`, `RDF3X`, `Stream`, `Jena` or `Sesame`.
 Defaults to `MemoryIndex`
 
-**Please note that not all evaluators provided the same level of information (if
-  at all)!**
+**Please note that not all evaluators provided the same level of information (if at all)!**
 
-## Errors ##
+Errors
+------
 
-The server usually responds with an error object describing what went wrong.
-This is not a complete list - just some examples.
+The server usually responds with an error object describing what went wrong. This is not a complete list - just some examples.
 
 **Requested evaluator does not provide information (200 OK)**
 
@@ -642,13 +623,12 @@ This is not a complete list - just some examples.
 POST to /nonstandard/sparql/graphs
 ==================================
 
-Returns operator graphs for each optimization phase used when processing the
-query.
+Returns operator graphs for each optimization phase used when processing the query.
 
-Request body must be a JSON object. The request format is the same as for
-[POST to /nonstandard/sparql].
+Request body must be a JSON object. The request format is the same as for [POST to /nonstandard/sparql](#post-to-nonstandardsparql).
 
-## Minimal configuration ##
+Minimal configuration
+---------------------
 
     Request
 
@@ -851,12 +831,12 @@ Request body must be a JSON object. The request format is the same as for
 POST to /nonstandard/rif
 ========================
 
-Request format is the same as for POSTs to [POST to /nonstandard/sparql], except that
-`query` must be RIF. Also optional `evaluator` key is ignored.
+Request format is the same as for POSTs to [POST to /nonstandard/sparql](#post-to-nonstandardsparql), except that `query` must be RIF. Also optional `evaluator` key is ignored.
 
 **Please note that some formatters like `JSON` aren't supporting RIF results yet (02/2015)!**
 
-## Minimal configuration ##
+Minimal configuration
+---------------------
 
     Request
 
@@ -873,15 +853,14 @@ Request format is the same as for POSTs to [POST to /nonstandard/sparql], except
     }
 
 POST to /nonstandard/rif/info
-========================
+=============================
 
-Returns additional compilation information about a RIF document. It will return
-the AST and the rule set.
+Returns additional compilation information about a RIF document. It will return the AST and the rule set.
 
-Request format is the same as for POSTs to [POST to /nonstandard/sparql/info], except that
-`query` must be RIF. Also optional `evaluator` key is ignored.
+Request format is the same as for POSTs to [POST to /nonstandard/sparql/info](#post-to-nonstandardsparqlinfo), except that `query` must be RIF. Also optional `evaluator` key is ignored.
 
-## Minimal configuration ##
+Minimal configuration
+---------------------
 
     Request
 
@@ -930,10 +909,8 @@ Request format is the same as for POSTs to [POST to /nonstandard/sparql/info], e
     }
 
 POST to /nonstandard/rif/graphs
-==================================
+===============================
 
-Returns operator graphs for each optimization phase used when processing the
-query.
+Returns operator graphs for each optimization phase used when processing the query.
 
-Request body must be a JSON object. The request format is the same as for
-[POST to /nonstandard/rif].
+Request body must be a JSON object. The request format is the same as for [POST to /nonstandard/rif](#post-to-nonstandardrif).
