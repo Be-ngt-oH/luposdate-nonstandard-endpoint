@@ -209,7 +209,7 @@ public class EvaluationHelper {
 	 * @param e the error throwable
 	 * @return a triple containing the line, column and error message. If the line and column is not detected, -1 is returned for both
 	 */
-	protected static Triple<Integer, Integer, String> dealWithThrowableFromQueryParser(final Throwable e) {
+	public static Triple<Integer, Integer, String> dealWithThrowableFromQueryParser(final Throwable e) {
 		int line = -1;
 		int column = -1;
 		if (e instanceof TokenMgrError) {
@@ -299,8 +299,10 @@ public class EvaluationHelper {
 				column = Integer.parseInt(matcher.group(2));
 			}
 			return new Triple<Integer, Integer, String>(line, column, mqe.getMessage());
+		} else {
+			// default: just return the error message!
+			return new Triple<Integer, Integer, String>(-1, -1, e.toString());
 		}
-		return null;
 	}
 
 	/**
@@ -316,7 +318,7 @@ public class EvaluationHelper {
 
 			// create the pattern to match
 			// and create a matcher against the string
-			final Pattern pattern = Pattern.compile("\\[(\\d+):(\\d+)\\]");
+			final Pattern pattern = Pattern.compile("line (\\d+), column (\\d+)");
 			final Matcher matcher = pattern.matcher(n3e.getMessage());
 
 			final Pattern pattern2 = Pattern.compile("Line (\\d+): ");

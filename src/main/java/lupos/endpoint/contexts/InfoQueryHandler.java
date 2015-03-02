@@ -16,9 +16,11 @@ import lupos.sparql1_1.TokenMgrError;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openrdf.query.MalformedQueryException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.hp.hpl.jena.query.QueryParseException;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -93,11 +95,26 @@ public class InfoQueryHandler implements HttpHandler {
 				result = EvaluationHelper.getCompileInfo(
 						parameters.EVALUATOR_INDEX, this.RIF_EVALUATION,
 						parameters.QUERY);
-			} catch (TokenMgrError | ParseException
+			} catch (TokenMgrError | ParseException | QueryParseException
+					| MalformedQueryException
 					| lupos.rif.generated.parser.ParseException
 					| lupos.rif.generated.parser.TokenMgrError e) {
 				LOGGER.info("Malformed query: {}", e.getMessage());
-				response.put("queryError", e.getMessage());
+				Triple<Integer, Integer, String> detailedError = EvaluationHelper
+						.dealWithThrowableFromQueryParser(e);
+				Integer line = detailedError.getFirst();
+				Integer column = detailedError.getSecond();
+				String error = detailedError.getThird();
+
+				JSONObject errorJson = new JSONObject();
+				if (line != -1) {
+					errorJson.put("line", line);
+				}
+				if (column != -1) {
+					errorJson.put("column", column);
+				}
+				errorJson.put("errorMessage", error);
+				response.put("queryError", errorJson);
 				// We send HTTP_OK, because the actual HTTP request was correct
 				responseStatus = HTTP_OK;
 				return;

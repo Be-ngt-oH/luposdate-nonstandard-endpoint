@@ -257,7 +257,11 @@ For semantic errors the server issues a 200 OK response.
     Response
 
     {
-        "queryError": "Lexical error at line 1, column 7.  Encountered: <EOF> after : \"foobar\""
+        "queryError": {
+            "line": 1,
+            "column": 7,
+            "errorMessage": "Lexical error at line 1, column 7.  Encountered: <EOF> after : \"foobar\""
+        }
     }
 
 **Another bad query (200 OK)**
@@ -270,7 +274,11 @@ For semantic errors the server issues a 200 OK response.
     Response
 
     {
-        "queryError": "Encountered \" \"*\" \"* \"\" at line 1, column 9.\nWas expecting one of:\n    \"{\" ...\n    \"WHERE\" ...\n    \"FROM\" ...\n    "
+        "queryError": {
+            "line": 1,
+            "column": 9,
+            "errorMessage": "Encountered \" \"*\" \"* \"\" at line 1, column 9.\nWas expecting one of:\n    \"{\" ...\n    \"WHERE\" ...\n    \"FROM\" ...\n    "
+        }
     }
 
 **Bad RDF (200 OK)**
@@ -285,8 +293,13 @@ For semantic errors the server issues a 200 OK response.
     Response
 
     {
-        "rdfError": "Lexical error at line 1, column 7.  Encountered: <EOF> after : \"foobar\""
+        "rdfError": {
+            "line": 1,
+            "column": 7,
+            "errorMessage": "Lexical error at line 1, column 7.  Encountered: <EOF> after : \"foobar\""
+        }
     }
+
 
 POST to /nonstandard/sparql/info
 ================================
