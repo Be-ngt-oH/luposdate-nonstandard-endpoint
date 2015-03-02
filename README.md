@@ -7,8 +7,6 @@ This is an extension to the standard endpoint of
 HTML form under `http://localhost:8080` which you can use to run a SPARQL query
 against the endpoint.
 
-**It will create an index on the first run or when run with command line argument `--rebuild-index`.**
-
 This extension provides a set of new endpoints, which can be accessed via following routes: `/nonstandard/sparql`, `/nonstandard/sparql/info`, `/nonstandard/sparql/graphs`, `/nonstandard/rif`, `/nonstandard/rif/info` and `/nonstandard/rif/graphs`.
 
 These can be used to perform offline queries, retrieve ASTs and operator graphs. In general it's a good idea to build up a request for `nonstandard/sparql` or `nonstandard/rif` and send the exact same request to `info` and `graphs` routes to retrieve more information. Not needed parameters will be ignored. All extensions are mainly intended as a backend for [Semantic Web education tools](https://github.com/hauptbenutzer/luposdate-spa-client).
@@ -32,6 +30,7 @@ Before you start, make sure that you have a JDK and [Maven](http://maven.apache.
 2. Run `mvn package`
 3. Run `java -jar target/luposdateExtendedEndpoint-0.1-SNAPSHOT-jar-with-dependencies.jar`
 
+**It will create an index on the first run or when run with command line argument `--rebuild-index`.**
 
 POST to /nonstandard/sparql
 ===========================
