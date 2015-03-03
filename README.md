@@ -160,6 +160,64 @@ Alternative output formats
         "]
     }
 
+SPARQL graph query
+------------------
+
+```
+Request
+
+    {
+        "query": "CONSTRUCT WHERE { ?s ?p ?o. }",
+        "rdf": "@prefix dc: <http://purl.org/dc/elements/1.1/>.\n <http://en.wikipedia.org/wiki/Tony_Benn> dc:title \"Tony Benn\"; dc:publisher \"Wikipedia\".",
+        "formats": ["json", "plain"]
+    }
+```
+
+```
+Response
+
+{
+  "JSON": [
+    {
+      "rdf": "<http://en.wikipedia.org/wiki/Tony_Benn> <http://purl.org/dc/elements/1.1/title> \"Tony Benn\" .\n<http://en.wikipedia.org/wiki/Tony_Benn> <http://purl.org/dc/elements/1.1/publisher> \"Wikipedia\" .\n"
+    }
+  ],
+  "triples": [
+    {
+      "subject": {
+        "value": "http://en.wikipedia.org/wiki/Tony_Benn",
+        "type": "uri"
+      },
+      "predicate": {
+        "value": "http://purl.org/dc/elements/1.1/title",
+        "type": "uri"
+      },
+      "object": {
+        "value": "Tony Benn",
+        "type": "literal"
+      }
+    },
+    {
+      "subject": {
+        "value": "http://en.wikipedia.org/wiki/Tony_Benn",
+        "type": "uri"
+      },
+      "predicate": {
+        "value": "http://purl.org/dc/elements/1.1/publisher",
+        "type": "uri"
+      },
+      "object": {
+        "value": "Wikipedia",
+        "type": "literal"
+      }
+    }
+  ],
+  "Plain": [
+    "[(<http://en.wikipedia.org/wiki/Tony_Benn>,<http://purl.org/dc/elements/1.1/title>,\"Tony Benn\"), (<http://en.wikipedia.org/wiki/Tony_Benn>,<http://purl.org/dc/elements/1.1/publisher>,\"Wikipedia\")]"
+  ]
+}
+```
+
 JSON Keys
 ---------
 

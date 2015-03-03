@@ -197,8 +197,15 @@ public class ExtendedQueryHandler implements HttpHandler {
 					// as a
 					// nested JSON object
 					if (formatter instanceof JSONFormatter) {
-						response.append(formatter.getName(),
-								new JSONObject(os.toString()));
+						System.out.println(os.toString());
+						if (queryResult instanceof GraphResult) {
+							JSONObject graphResult = new JSONObject();
+							graphResult.put("rdf", os.toString());
+							response.append(formatter.getName(), graphResult);
+						} else {
+							response.append(formatter.getName(),
+									new JSONObject(os.toString()));
+						}
 					} else {
 						response.append(formatter.getName(), os.toString());
 					}
