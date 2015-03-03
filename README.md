@@ -476,9 +476,9 @@ Alternative output formats
         "astFormat": "graph"
     }
 
-    Response
-
 ```
+Response
+
 {
   "coreSPARQL": "SELECT *\n\nWHERE \n{\n?s ?p ?o .\n} LIMIT 10\n",
   "AST": {
@@ -757,9 +757,9 @@ Minimal configuration
         "rdf": "@prefix dc: <http://purl.org/dc/elements/1.1/>.\n <http://en.wikipedia.org/wiki/Tony_Benn> dc:title \"Tony Benn\"; dc:publisher \"Wikipedia\"."
     }
 
-    Response (always graph output format)
-
 ```
+Response (always graph output format)
+
 {
   "prefix": {
     "names": [],
@@ -1004,11 +1004,37 @@ Minimal configuration
         "formats": ["plain"]
     }
 
-    Response
+```
+Response
 
+{
+  "predicates": [
     {
-        "Plain": ["[<http://example.com/concepts#buy>(<http://example.com/people#Mary>, <http://example.com/books#LeRif>, <http://example.com/people#John>)]"]
+      "parameters": [
+        {
+          "value": "http://example.com/people#Mary",
+          "type": "uri"
+        },
+        {
+          "value": "http://example.com/books#LeRif",
+          "type": "uri"
+        },
+        {
+          "value": "http://example.com/people#John",
+          "type": "uri"
+        }
+      ],
+      "predicateName": {
+        "value": "http://example.com/concepts#buy",
+        "type": "uri"
+      }
     }
+  ],
+  "Plain": [
+    "[<http://example.com/concepts#buy>(<http://example.com/people#Mary>, <http://example.com/books#LeRif>, <http://example.com/people#John>)]"
+  ]
+}
+```
 
 POST to /nonstandard/rif/info
 =============================

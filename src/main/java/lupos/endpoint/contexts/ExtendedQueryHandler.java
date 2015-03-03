@@ -5,6 +5,13 @@ import java.io.OutputStream;
 import java.util.HashSet;
 import java.util.Set;
 
+import lupos.datastructures.items.literal.AnonymousLiteral;
+import lupos.datastructures.items.literal.LanguageTaggedLiteral;
+import lupos.datastructures.items.literal.LazyLiteral;
+import lupos.datastructures.items.literal.Literal;
+import lupos.datastructures.items.literal.TypedLiteral;
+import lupos.datastructures.items.literal.URILiteral;
+import lupos.datastructures.queryresult.GraphResult;
 import lupos.datastructures.queryresult.QueryResult;
 import lupos.endpoint.EvaluationHelper;
 import lupos.endpoint.EvaluationHelper.GENERATION;
@@ -12,9 +19,12 @@ import lupos.endpoint.EvaluationHelper.SPARQLINFERENCE;
 import lupos.endpoint.EvaluationHelper.SPARQLINFERENCEMATERIALIZATION;
 import lupos.endpoint.server.Endpoint;
 import lupos.endpoint.server.format.Formatter;
+import lupos.endpoint.server.format.HeadBodyFormatter;
 import lupos.endpoint.server.format.JSONFormatter;
 import lupos.misc.Triple;
 import lupos.misc.Tuple;
+import lupos.rif.datatypes.Predicate;
+import lupos.rif.datatypes.RuleResult;
 import lupos.sparql1_1.ParseException;
 import lupos.sparql1_1.TokenMgrError;
 
@@ -193,6 +203,55 @@ public class ExtendedQueryHandler implements HttpHandler {
 						response.append(formatter.getName(), os.toString());
 					}
 				}
+				// Add additional (formatter independent) information
+				if (queryResult instanceof GraphResult) {
+					GraphResult graphResult = (GraphResult) queryResult;
+					JSONFormatter jsonFormatter = (JSONFormatter) Endpoint.getRegisteredFormatters().get("json");
+
+					for (lupos.datastructures.items.Triple triple : graphResult.getGraphResultTriples()) {
+						JSONObject tripleJson = new JSONObject();
+						OutputStream osSubject = new ByteArrayOutputStream();
+						OutputStream osPredicate = new ByteArrayOutputStream();
+						OutputStream osObject = new ByteArrayOutputStream();
+						
+// TODO: Uncomment, when HeadBodyFormatter.writeLiteral(...) is public
+//						jsonFormatter.writeLiteral(osSubject, triple.getSubject());
+//						jsonFormatter.writeLiteral(osPredicate, triple.getPredicate());
+//						jsonFormatter.writeLiteral(osObject, triple.getObject());
+						this.writeLiteral(osSubject, triple.getSubject(), jsonFormatter);
+						this.writeLiteral(osPredicate, triple.getPredicate(), jsonFormatter);
+						this.writeLiteral(osObject, triple.getObject(), jsonFormatter);
+
+						tripleJson.put("subject", new JSONObject('{' + osSubject.toString() + '}'));
+						tripleJson.put("predicate", new JSONObject('{' + osPredicate.toString() + '}'));
+						tripleJson.put("object", new JSONObject('{' + osObject.toString() + '}'));
+						response.append("triples", tripleJson);
+					}
+				} else if (queryResult instanceof RuleResult) {
+					RuleResult ruleResult = (RuleResult) queryResult;
+					JSONFormatter jsonFormatter = (JSONFormatter) Endpoint.getRegisteredFormatters().get("json");
+
+					for (Predicate predicate : ruleResult.getPredicateResults()) {
+						JSONObject predicateJson = new JSONObject();
+						
+						OutputStream osLiteralName = new ByteArrayOutputStream();
+// TODO: Uncomment, when HeadBodyFormatter.writeLiteral(...) is public
+//						jsonFormatter.writeLiteral(osLiteralName, predicate.getName());
+						this.writeLiteral(osLiteralName, predicate.getName(), jsonFormatter);
+						
+						predicateJson.put("predicateName", new JSONObject('{' + osLiteralName.toString() + '}'));
+						
+						for (Literal parameter : predicate.getParameters()) {
+							OutputStream osParameter = new ByteArrayOutputStream();
+// TODO: Uncomment, when HeadBodyFormatter.writeLiteral(...) is public
+//							jsonFormatter.writeLiteral(osParameter, parameter);
+							this.writeLiteral(osParameter, parameter, jsonFormatter);
+							predicateJson.append("parameters", new JSONObject('{' + osParameter.toString() + '}'));
+						}
+						
+						response.append("predicates", predicateJson);
+					}
+				}
 			}
 			responseStatus = HTTP_OK;
 		} catch (Exception e) {
@@ -213,6 +272,30 @@ public class ExtendedQueryHandler implements HttpHandler {
 	private void setDefaultHeaders(HttpExchange t) {
 		t.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
 		t.getResponseHeaders().add("Content-Type", "application/json");
+	}
+	
+	
+	// TODO: Remove, when HeadBodyFormatter.writeLiteral(...) is public
+	// Temporary
+	private void writeLiteral(final OutputStream os, final Literal literal, HeadBodyFormatter formatter) throws IOException {
+		if(literal!=null){
+			final Literal materializedLiteral = (literal instanceof LazyLiteral)?((LazyLiteral)literal).getLiteral(): literal;
+			if (materializedLiteral.isBlank()){
+				formatter.writeBlankNode(os, (AnonymousLiteral) materializedLiteral);
+			} else if(materializedLiteral.isURI()){
+				formatter.writeURI(os, (URILiteral) materializedLiteral);
+			} else {
+				// literal => <literal>
+				if(materializedLiteral instanceof TypedLiteral){
+					formatter.writeTypedLiteral(os, (TypedLiteral)materializedLiteral);
+				} else
+					if(materializedLiteral instanceof LanguageTaggedLiteral){
+						formatter.writeLanguageTaggedLiteral(os, (LanguageTaggedLiteral)materializedLiteral);
+					} else {
+						formatter.writeSimpleLiteral(os, materializedLiteral);
+					}
+			}
+		}
 	}
 }
 
