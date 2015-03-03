@@ -52,47 +52,47 @@ Minimal configuration
     Response
 
     {
-        "JSON": {
-            "head": {
-                "vars": [
-                    "p",
-                    "s",
-                    "o"
-                ]
-            },
-            "results": {
-                "bindings": [
-                    {
-                        "p": {
-                            "type": "uri",
-                            "value": "http://purl.org/dc/elements/1.1/title"
-                        },
-                        "s": {
-                            "type": "uri",
-                            "value": "http://en.wikipedia.org/wiki/Tony_Benn"
-                        },
-                        "o": {
-                            "type": "literal",
-                            "value": "Tony Benn"
-                        }
+        "JSON": [{
+                    "head": {
+                        "vars": [
+                            "p",
+                            "s",
+                            "o"
+                        ]
                     },
-                    {
-                        "p": {
-                            "type": "uri",
-                            "value": "http://purl.org/dc/elements/1.1/publisher"
-                        },
-                        "s": {
-                            "type": "uri",
-                            "value": "http://en.wikipedia.org/wiki/Tony_Benn"
-                        },
-                        "o": {
-                            "type": "literal",
-                            "value": "Wikipedia"
-                        }
+                    "results": {
+                        "bindings": [
+                            {
+                                "p": {
+                                    "type": "uri",
+                                    "value": "http://purl.org/dc/elements/1.1/title"
+                                },
+                                "s": {
+                                    "type": "uri",
+                                    "value": "http://en.wikipedia.org/wiki/Tony_Benn"
+                                },
+                                "o": {
+                                    "type": "literal",
+                                    "value": "Tony Benn"
+                                }
+                            },
+                            {
+                                "p": {
+                                    "type": "uri",
+                                    "value": "http://purl.org/dc/elements/1.1/publisher"
+                                },
+                                "s": {
+                                    "type": "uri",
+                                    "value": "http://en.wikipedia.org/wiki/Tony_Benn"
+                                },
+                                "o": {
+                                    "type": "literal",
+                                    "value": "Wikipedia"
+                                }
+                            }
+                        ]
                     }
-                ]
-            }
-        }
+                }]
     }
 
 Alternative output formats
@@ -109,18 +109,18 @@ Alternative output formats
     Response (raw)
 
     {
-        "Plain": "[{?p=<http://purl.org/dc/elements/1.1/title>, ?s=<http://en.wikipedia.org/wiki/Tony_Benn>, ?o=\\"Tony Benn\\"}, {?p=<http://purl.org/dc/elements/1.1/publisher>, ?s=<http://en.wikipedia.org/wiki/Tony_Benn>, ?o=\\"Wikipedia\\"}]",
-        "XML": "<?xml version=\\"1.0\\"?>\\n<sparql xmlns:rdf=\\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\\" xmlns:xs=\\"http://www.w3.org/2001/XMLSchema#\\" xmlns=\\"http://www.w3.org/2005/sparql-results#\\">\\n <head>\\n  <variable name=\\"p\\"/>\\n  <variable name=\\"s\\"/>\\n  <variable name=\\"o\\"/>\\n </head>\\n <results>\\n   <result>\\n    <binding name=\\"p\\">\\n     <uri>http://purl.org/dc/elements/1.1/title</uri>\\n    </binding>\\n    <binding name=\\"s\\">\\n     <uri>http://en.wikipedia.org/wiki/Tony_Benn</uri>\\n    </binding>\\n    <binding name=\\"o\\">\\n     <literal>Tony Benn</literal>\\n    </binding>\\n   </result>\\n   <result>\\n    <binding name=\\"p\\">\\n     <uri>http://purl.org/dc/elements/1.1/publisher</uri>\\n    </binding>\\n    <binding name=\\"s\\">\\n     <uri>http://en.wikipedia.org/wiki/Tony_Benn</uri>\\n    </binding>\\n    <binding name=\\"o\\">\\n     <literal>Wikipedia</literal>\\n    </binding>\\n   </result>\\n </results>\\n</sparql>",
-        "Comma Separated Values (CSV)": "p,s,o\\n<http://purl.org/dc/elements/1.1/title>,<http://en.wikipedia.org/wiki/Tony_Benn>,\\"Tony Benn\\"\\n<http://purl.org/dc/elements/1.1/publisher>,<http://en.wikipedia.org/wiki/Tony_Benn>,\\"Wikipedia\\"\\n"
+        "Plain": ["[{?p=<http://purl.org/dc/elements/1.1/title>, ?s=<http://en.wikipedia.org/wiki/Tony_Benn>, ?o=\\"Tony Benn\\"}, {?p=<http://purl.org/dc/elements/1.1/publisher>, ?s=<http://en.wikipedia.org/wiki/Tony_Benn>, ?o=\\"Wikipedia\\"}]"],
+        "XML": ["<?xml version=\\"1.0\\"?>\\n<sparql xmlns:rdf=\\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\\" xmlns:xs=\\"http://www.w3.org/2001/XMLSchema#\\" xmlns=\\"http://www.w3.org/2005/sparql-results#\\">\\n <head>\\n  <variable name=\\"p\\"/>\\n  <variable name=\\"s\\"/>\\n  <variable name=\\"o\\"/>\\n </head>\\n <results>\\n   <result>\\n    <binding name=\\"p\\">\\n     <uri>http://purl.org/dc/elements/1.1/title</uri>\\n    </binding>\\n    <binding name=\\"s\\">\\n     <uri>http://en.wikipedia.org/wiki/Tony_Benn</uri>\\n    </binding>\\n    <binding name=\\"o\\">\\n     <literal>Tony Benn</literal>\\n    </binding>\\n   </result>\\n   <result>\\n    <binding name=\\"p\\">\\n     <uri>http://purl.org/dc/elements/1.1/publisher</uri>\\n    </binding>\\n    <binding name=\\"s\\">\\n     <uri>http://en.wikipedia.org/wiki/Tony_Benn</uri>\\n    </binding>\\n    <binding name=\\"o\\">\\n     <literal>Wikipedia</literal>\\n    </binding>\\n   </result>\\n </results>\\n</sparql>"],
+        "Comma Separated Values (CSV)": ["p,s,o\\n<http://purl.org/dc/elements/1.1/title>,<http://en.wikipedia.org/wiki/Tony_Benn>,\\"Tony Benn\\"\\n<http://purl.org/dc/elements/1.1/publisher>,<http://en.wikipedia.org/wiki/Tony_Benn>,\\"Wikipedia\\"\\n"]
     }
 
     Response (pretty without escaping - this is not valid JSON)
 
     {
-        "Plain": "
+        "Plain": ["
             [{?p=<http://purl.org/dc/elements/1.1/title>, ?s=<http://en.wikipedia.org/wiki/Tony_Benn>, ?o="Tony Benn"}, {?p=<http://purl.org/dc/elements/1.1/publisher>, ?s=<http://en.wikipedia.org/wiki/Tony_Benn>, ?o="Wikipedia"}]
-        ",
-        "XML": "
+        "],
+        "XML": ["
             <?xml version="1.0"?>
             <sparql xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns="http://www.w3.org/2005/sparql-results#">
              <head>
@@ -153,11 +153,11 @@ Alternative output formats
                </result>
              </results>
             </sparql>
-        ",
-        "Comma Separated Values (CSV)": "
+        "],
+        ["Comma Separated Values (CSV)": "
             <http://purl.org/dc/elements/1.1/title>,<http://en.wikipedia.org/wiki/Tony_Benn>,"Tony Benn"
             <http://purl.org/dc/elements/1.1/publisher>,<http://en.wikipedia.org/wiki/Tony_Benn>,"Wikipedia"
-        "
+        "]
     }
 
 JSON Keys
@@ -885,7 +885,7 @@ Minimal configuration
     Response
 
     {
-        "Plain": "[<http://example.com/concepts#buy>(<http://example.com/people#Mary>, <http://example.com/books#LeRif>, <http://example.com/people#John>)]"
+        "Plain": ["[<http://example.com/concepts#buy>(<http://example.com/people#Mary>, <http://example.com/books#LeRif>, <http://example.com/people#John>)]"]
     }
 
 POST to /nonstandard/rif/info

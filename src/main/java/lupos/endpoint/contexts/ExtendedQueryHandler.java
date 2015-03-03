@@ -165,25 +165,33 @@ public class ExtendedQueryHandler implements HttpHandler {
 			}
 			LOGGER.info("Finished processing");
 			boolean emptyResult = result.getSecond().length == 0;
+
 			// Format the output
-			for (Formatter formatter : parameters.FORMATTERS) {
-				OutputStream os = new ByteArrayOutputStream();
-				if (!emptyResult) {
-					formatter.writeResult(os,
-							result.getSecond()[0].getVariableSet(),
-							result.getSecond()[0]);
+			if (emptyResult) {
+				for (Formatter formatter : parameters.FORMATTERS) {
+					if (formatter instanceof JSONFormatter) {
+						response.append(formatter.getName(), new JSONObject());
+					} else {
+						response.append(formatter.getName(), "");
+					}
 				}
-				// In case of JSON formatting, we'll insert it non-escaped as a
-				// nested JSON object
-				if (formatter instanceof JSONFormatter) {
-					if (!emptyResult) {
-						response.put(formatter.getName(),
+			}
+
+			for (QueryResult queryResult : result.getSecond()) {
+				for (Formatter formatter : parameters.FORMATTERS) {
+					OutputStream os = new ByteArrayOutputStream();
+
+					formatter.writeResult(os, queryResult.getVariableSet(),
+							queryResult);
+					// In case of JSON formatting, we'll insert it non-escaped
+					// as a
+					// nested JSON object
+					if (formatter instanceof JSONFormatter) {
+						response.append(formatter.getName(),
 								new JSONObject(os.toString()));
 					} else {
-						response.put(formatter.getName(), new JSONObject());
+						response.append(formatter.getName(), os.toString());
 					}
-				} else {
-					response.put(formatter.getName(), os.toString());
 				}
 			}
 			responseStatus = HTTP_OK;
