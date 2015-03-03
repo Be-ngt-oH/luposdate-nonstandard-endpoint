@@ -67,8 +67,9 @@ public class GraphSerialization {
 		appendBasicNodeInformationToJson(graph, json);
 
 		for (GraphWrapperIDTuple node : graph.getSucceedingElements()) {
-			json.append("children",
-					graphWrapperToJsonNested(node.getOperator()));
+			JSONObject jsonChild = graphWrapperToJsonNested(node.getOperator());
+			jsonChild.put("operandPosition", node.getId());
+			json.append("children", jsonChild);
 		}
 
 		return json;
@@ -118,9 +119,11 @@ public class GraphSerialization {
 					appendBasicNodeInformationToJson(successor, nodeJson);
 					nodeJson.put("depth", depth);
 					json.append("nodes", nodeJson);
-					edgesJson.append("" + node.hashCode(),
-							"" + successor.hashCode());
 				}
+				JSONObject edgeJson = new JSONObject();
+				edgeJson.put("operandPosition", successorTuple.getId());
+				edgeJson.put("nodeId", "" + successor.hashCode());
+				edgesJson.append("" + node.hashCode(), edgeJson);
 			}
 		}
 

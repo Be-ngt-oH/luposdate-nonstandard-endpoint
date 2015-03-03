@@ -319,117 +319,151 @@ Minimal configuration
     Response (nested output format)
 
     {
-        "AST": {
-            "children": [
-                {
-                    "children": [
-                        {
-                            "children": [
-                                {
-                                    "children": [
-                                        {
-                                            "description": "Var s",
-                                            "classification": "TerminalNode",
-                                            "type": "ASTVar"
-                                        },
-                                        {
-                                            "description": "Var p",
-                                            "classification": "TerminalNode",
-                                            "type": "ASTVar"
-                                        },
-                                        {
-                                            "children": [
-                                                {
-                                                    "description": "Var o",
-                                                    "classification": "TerminalNode",
-                                                    "type": "ASTVar"
-                                                }
-                                            ],
-                                            "description": "ObjectList",
-                                            "classification": "NonTerminalNode",
-                                            "type": "ASTObjectList"
-                                        }
-                                    ],
-                                    "description": "TripleSet",
-                                    "classification": "UnknownNode",
-                                    "type": "ASTTripleSet"
-                                }
-                            ],
-                            "description": "GroupConstraint",
-                            "classification": "NonTerminalNode",
-                            "type": "ASTGroupConstraint"
-                        },
-                        {
-                            "description": "Limit 10",
-                            "classification": "HighLevelOperator",
-                            "type": "ASTLimit"
-                        }
-                    ],
-                    "description": "SelectQuery disctinct :false reduced:false select all:true",
-                    "classification": "QueryHead",
-                    "type": "ASTSelectQuery"
-                }
-            ],
-            "description": "Query",
+      "coreSPARQL": "SELECT *\n\nWHERE \n{\n?s ?p ?o .\n} LIMIT 10\n",
+      "AST": {
+        "id": 1283301884,
+        "description": "Query",
+        "classification": "QueryHead",
+        "children": [
+          {
+            "id": 846561706,
+            "operandPosition": 0,
+            "description": "SelectQuery disctinct :false reduced:false select all:true",
             "classification": "QueryHead",
-            "type": "ASTQuery"
-        },
-        "coreAST": {
             "children": [
-                {
+              {
+                "id": 1083431367,
+                "operandPosition": 0,
+                "description": "GroupConstraint",
+                "classification": "NonTerminalNode",
+                "children": [
+                  {
+                    "id": 717142256,
+                    "operandPosition": 0,
+                    "description": "TripleSet",
+                    "classification": "UnknownNode",
                     "children": [
-                        {
-                            "children": [
-                                {
-                                    "children": [
-                                        {
-                                            "description": "Var s",
-                                            "classification": "TerminalNode",
-                                            "type": "ASTVar"
-                                        },
-                                        {
-                                            "description": "Var p",
-                                            "classification": "TerminalNode",
-                                            "type": "ASTVar"
-                                        },
-                                        {
-                                            "children": [
-                                                {
-                                                    "description": "Var o",
-                                                    "classification": "TerminalNode",
-                                                    "type": "ASTVar"
-                                                }
-                                            ],
-                                            "description": "ObjectList",
-                                            "classification": "NonTerminalNode",
-                                            "type": "ASTObjectList"
-                                        }
-                                    ],
-                                    "description": "TripleSet",
-                                    "classification": "UnknownNode",
-                                    "type": "ASTTripleSet"
-                                }
-                            ],
-                            "description": "GroupConstraint",
-                            "classification": "NonTerminalNode",
-                            "type": "ASTGroupConstraint"
-                        },
-                        {
-                            "description": "Limit 10",
-                            "classification": "HighLevelOperator",
-                            "type": "ASTLimit"
-                        }
+                      {
+                        "id": 1331669628,
+                        "operandPosition": 0,
+                        "description": "Var s",
+                        "classification": "TerminalNode",
+                        "type": "ASTVar"
+                      },
+                      {
+                        "id": 296868762,
+                        "operandPosition": 1,
+                        "description": "Var p",
+                        "classification": "TerminalNode",
+                        "type": "ASTVar"
+                      },
+                      {
+                        "id": 868770953,
+                        "operandPosition": 2,
+                        "description": "ObjectList",
+                        "classification": "NonTerminalNode",
+                        "children": [
+                          {
+                            "id": 692091118,
+                            "operandPosition": 0,
+                            "description": "Var o",
+                            "classification": "TerminalNode",
+                            "type": "ASTVar"
+                          }
+                        ],
+                        "type": "ASTObjectList"
+                      }
                     ],
-                    "description": "SelectQuery disctinct :false reduced:false select all:true",
-                    "classification": "QueryHead",
-                    "type": "ASTSelectQuery"
-                }
+                    "type": "ASTTripleSet"
+                  }
+                ],
+                "type": "ASTGroupConstraint"
+              },
+              {
+                "id": 1203988074,
+                "operandPosition": 1,
+                "description": "Limit 10",
+                "classification": "HighLevelOperator",
+                "type": "ASTLimit"
+              }
             ],
-            "description": "Query",
+            "type": "ASTSelectQuery"
+          }
+        ],
+        "type": "ASTQuery"
+      },
+      "coreAST": {
+        "id": 1836637684,
+        "description": "Query",
+        "classification": "QueryHead",
+        "children": [
+          {
+            "id": 439613010,
+            "operandPosition": 0,
+            "description": "SelectQuery disctinct :false reduced:false select all:true",
             "classification": "QueryHead",
-            "type": "ASTQuery"
-        },
-        "coreSPARQL": "SELECT *\n\nWHERE \n{\n?s ?p ?o .\n} LIMIT 10\n"
+            "children": [
+              {
+                "id": 1232113390,
+                "operandPosition": 0,
+                "description": "GroupConstraint",
+                "classification": "NonTerminalNode",
+                "children": [
+                  {
+                    "id": 2092421356,
+                    "operandPosition": 0,
+                    "description": "TripleSet",
+                    "classification": "UnknownNode",
+                    "children": [
+                      {
+                        "id": 133527020,
+                        "operandPosition": 0,
+                        "description": "Var s",
+                        "classification": "TerminalNode",
+                        "type": "ASTVar"
+                      },
+                      {
+                        "id": 68214025,
+                        "operandPosition": 1,
+                        "description": "Var p",
+                        "classification": "TerminalNode",
+                        "type": "ASTVar"
+                      },
+                      {
+                        "id": 1864334324,
+                        "operandPosition": 2,
+                        "description": "ObjectList",
+                        "classification": "NonTerminalNode",
+                        "children": [
+                          {
+                            "id": 2080573738,
+                            "operandPosition": 0,
+                            "description": "Var o",
+                            "classification": "TerminalNode",
+                            "type": "ASTVar"
+                          }
+                        ],
+                        "type": "ASTObjectList"
+                      }
+                    ],
+                    "type": "ASTTripleSet"
+                  }
+                ],
+                "type": "ASTGroupConstraint"
+              },
+              {
+                "id": 726590465,
+                "operandPosition": 1,
+                "description": "Limit 10",
+                "classification": "HighLevelOperator",
+                "type": "ASTLimit"
+              }
+            ],
+            "type": "ASTSelectQuery"
+          }
+        ],
+        "type": "ASTQuery"
+      }
     }
 
 Alternative output formats
@@ -444,183 +478,233 @@ Alternative output formats
 
     Response
 
-    {
-        "AST": {
-            "nodes": [
-                {
-                    "depth": 0,
-                    "description": "Query",
-                    "id": 909246165,
-                    "type": "ASTQuery",
-                    "classification": "QueryHead"
-                },
-                {
-                    "depth": 1,
-                    "description": "SelectQuery disctinct :false reduced:false select all:true",
-                    "id": 533882334,
-                    "type": "ASTSelectQuery",
-                    "classification": "QueryHead"
-                },
-                {
-                    "depth": 2,
-                    "description": "GroupConstraint",
-                    "id": 1619217372,
-                    "type": "ASTGroupConstraint",
-                    "classification": "NonTerminalNode"
-                },
-                {
-                    "depth": 2,
-                    "description": "Limit 10",
-                    "id": 1953778864,
-                    "type": "ASTLimit",
-                    "classification": "HighLevelOperator"
-                },
-                {
-                    "depth": 3,
-                    "description": "TripleSet",
-                    "id": 756432169,
-                    "type": "ASTTripleSet",
-                    "classification": "UnknownNode"
-                },
-                {
-                    "depth": 4,
-                    "description": "Var s",
-                    "id": 560349632,
-                    "type": "ASTVar",
-                    "classification": "TerminalNode"
-                },
-                {
-                    "depth": 4,
-                    "description": "Var p",
-                    "id": 1530999707,
-                    "type": "ASTVar",
-                    "classification": "TerminalNode"
-                },
-                {
-                    "depth": 4,
-                    "description": "ObjectList",
-                    "id": 218559887,
-                    "type": "ASTObjectList",
-                    "classification": "NonTerminalNode"
-                },
-                {
-                    "depth": 5,
-                    "description": "Var o",
-                    "id": 300248691,
-                    "type": "ASTVar",
-                    "classification": "TerminalNode"
-                }
-            ],
-            "edges": {
-                "218559887": [
-                    "300248691"
-                ],
-                "533882334": [
-                    "1619217372",
-                    "1953778864"
-                ],
-                "756432169": [
-                    "560349632",
-                    "1530999707",
-                    "218559887"
-                ],
-                "909246165": [
-                    "533882334"
-                ],
-                "1619217372": [
-                    "756432169"
-                ]
-            }
+```
+{
+  "coreSPARQL": "SELECT *\n\nWHERE \n{\n?s ?p ?o .\n} LIMIT 10\n",
+  "AST": {
+    "edges": {
+      "1920728698": [
+        {
+          "operandPosition": 0,
+          "nodeId": "1198346414"
+        }
+      ],
+      "540591806": [
+        {
+          "operandPosition": 0,
+          "nodeId": "1870656632"
+        }
+      ],
+      "1198346414": [
+        {
+          "operandPosition": 0,
+          "nodeId": "1506538532"
         },
-        "coreAST": {
-            "nodes": [
-                {
-                    "depth": 0,
-                    "description": "Query",
-                    "id": 43931086,
-                    "type": "ASTQuery",
-                    "classification": "QueryHead"
-                },
-                {
-                    "depth": 1,
-                    "description": "SelectQuery disctinct :false reduced:false select all:true",
-                    "id": 1351709677,
-                    "type": "ASTSelectQuery",
-                    "classification": "QueryHead"
-                },
-                {
-                    "depth": 2,
-                    "description": "GroupConstraint",
-                    "id": 1786863357,
-                    "type": "ASTGroupConstraint",
-                    "classification": "NonTerminalNode"
-                },
-                {
-                    "depth": 2,
-                    "description": "Limit 10",
-                    "id": 1353524008,
-                    "type": "ASTLimit",
-                    "classification": "HighLevelOperator"
-                },
-                {
-                    "depth": 3,
-                    "description": "TripleSet",
-                    "id": 552418518,
-                    "type": "ASTTripleSet",
-                    "classification": "UnknownNode"
-                },
-                {
-                    "depth": 4,
-                    "description": "Var s",
-                    "id": 2067279165,
-                    "type": "ASTVar",
-                    "classification": "TerminalNode"
-                },
-                {
-                    "depth": 4,
-                    "description": "Var p",
-                    "id": 464450065,
-                    "type": "ASTVar",
-                    "classification": "TerminalNode"
-                },
-                {
-                    "depth": 4,
-                    "description": "ObjectList",
-                    "id": 572728879,
-                    "type": "ASTObjectList",
-                    "classification": "NonTerminalNode"
-                },
-                {
-                    "depth": 5,
-                    "description": "Var o",
-                    "id": 1801561393,
-                    "type": "ASTVar",
-                    "classification": "TerminalNode"
-                }
-            ],
-            "edges": {
-                "43931086": [
-                    "1351709677"
-                ],
-                "552418518": [
-                    "2067279165",
-                    "464450065",
-                    "572728879"
-                ],
-                "572728879": [
-                    "1801561393"
-                ],
-                "1351709677": [
-                    "1786863357",
-                    "1353524008"
-                ],
-                "1786863357": [
-                    "552418518"
-                ]
-            }
+        {
+          "operandPosition": 1,
+          "nodeId": "1560909194"
         },
-        "coreSPARQL": "SELECT *\n\nWHERE \n{\n?s ?p ?o .\n} LIMIT 10\n"
-    }
+        {
+          "operandPosition": 2,
+          "nodeId": "540591806"
+        }
+      ],
+      "1998854828": [
+        {
+          "operandPosition": 0,
+          "nodeId": "1666404175"
+        }
+      ],
+      "1666404175": [
+        {
+          "operandPosition": 0,
+          "nodeId": "1920728698"
+        },
+        {
+          "operandPosition": 1,
+          "nodeId": "713045582"
+        }
+      ]
+    },
+    "nodes": [
+      {
+        "id": 1998854828,
+        "description": "Query",
+        "classification": "QueryHead",
+        "type": "ASTQuery",
+        "depth": 0
+      },
+      {
+        "id": 1666404175,
+        "description": "SelectQuery disctinct :false reduced:false select all:true",
+        "classification": "QueryHead",
+        "type": "ASTSelectQuery",
+        "depth": 1
+      },
+      {
+        "id": 1920728698,
+        "description": "GroupConstraint",
+        "classification": "NonTerminalNode",
+        "type": "ASTGroupConstraint",
+        "depth": 2
+      },
+      {
+        "id": 713045582,
+        "description": "Limit 10",
+        "classification": "HighLevelOperator",
+        "type": "ASTLimit",
+        "depth": 2
+      },
+      {
+        "id": 1198346414,
+        "description": "TripleSet",
+        "classification": "UnknownNode",
+        "type": "ASTTripleSet",
+        "depth": 3
+      },
+      {
+        "id": 1506538532,
+        "description": "Var s",
+        "classification": "TerminalNode",
+        "type": "ASTVar",
+        "depth": 4
+      },
+      {
+        "id": 1560909194,
+        "description": "Var p",
+        "classification": "TerminalNode",
+        "type": "ASTVar",
+        "depth": 4
+      },
+      {
+        "id": 540591806,
+        "description": "ObjectList",
+        "classification": "NonTerminalNode",
+        "type": "ASTObjectList",
+        "depth": 4
+      },
+      {
+        "id": 1870656632,
+        "description": "Var o",
+        "classification": "TerminalNode",
+        "type": "ASTVar",
+        "depth": 5
+      }
+    ]
+  },
+  "coreAST": {
+    "edges": {
+      "2098935205": [
+        {
+          "operandPosition": 0,
+          "nodeId": "90121166"
+        },
+        {
+          "operandPosition": 1,
+          "nodeId": "690465827"
+        },
+        {
+          "operandPosition": 2,
+          "nodeId": "1805009648"
+        }
+      ],
+      "297717907": [
+        {
+          "operandPosition": 0,
+          "nodeId": "2098935205"
+        }
+      ],
+      "1805009648": [
+        {
+          "operandPosition": 0,
+          "nodeId": "1443156414"
+        }
+      ],
+      "1607659723": [
+        {
+          "operandPosition": 0,
+          "nodeId": "297717907"
+        },
+        {
+          "operandPosition": 1,
+          "nodeId": "107965439"
+        }
+      ],
+      "965421944": [
+        {
+          "operandPosition": 0,
+          "nodeId": "1607659723"
+        }
+      ]
+    },
+    "nodes": [
+      {
+        "id": 965421944,
+        "description": "Query",
+        "classification": "QueryHead",
+        "type": "ASTQuery",
+        "depth": 0
+      },
+      {
+        "id": 1607659723,
+        "description": "SelectQuery disctinct :false reduced:false select all:true",
+        "classification": "QueryHead",
+        "type": "ASTSelectQuery",
+        "depth": 1
+      },
+      {
+        "id": 297717907,
+        "description": "GroupConstraint",
+        "classification": "NonTerminalNode",
+        "type": "ASTGroupConstraint",
+        "depth": 2
+      },
+      {
+        "id": 107965439,
+        "description": "Limit 10",
+        "classification": "HighLevelOperator",
+        "type": "ASTLimit",
+        "depth": 2
+      },
+      {
+        "id": 2098935205,
+        "description": "TripleSet",
+        "classification": "UnknownNode",
+        "type": "ASTTripleSet",
+        "depth": 3
+      },
+      {
+        "id": 90121166,
+        "description": "Var s",
+        "classification": "TerminalNode",
+        "type": "ASTVar",
+        "depth": 4
+      },
+      {
+        "id": 690465827,
+        "description": "Var p",
+        "classification": "TerminalNode",
+        "type": "ASTVar",
+        "depth": 4
+      },
+      {
+        "id": 1805009648,
+        "description": "ObjectList",
+        "classification": "NonTerminalNode",
+        "type": "ASTObjectList",
+        "depth": 4
+      },
+      {
+        "id": 1443156414,
+        "description": "Var o",
+        "classification": "TerminalNode",
+        "type": "ASTVar",
+        "depth": 5
+      }
+    ]
+  }
+}
+```
 
 JSON Keys
 ---------
@@ -675,194 +759,232 @@ Minimal configuration
 
     Response (always graph output format)
 
-    {
-        "optimization": {
-            "steps": [
-                {
-                    "description": "Before a possible correction of the operator graph...",
-                    "ruleName": "correctoperatorgraphPackageDescription",
-                    "operatorGraph": {
-                        "nodes": [
-                            {
-                                "depth": 0,
-                                "description": "MemoryIndexRoot",
-                                "id": 0,
-                                "type": "BasicOperatorByteArray"
-                            },
-                            {
-                                "depth": 1,
-                                "description": "Memory Index Scan on\nTriplePattern (?s, ?p, ?o)",
-                                "id": 44,
-                                "type": "BasicOperatorByteArray"
-                            },
-                            {
-                                "depth": 2,
-                                "description": "Limit 10",
-                                "id": 154,
-                                "type": "BasicOperatorByteArray"
-                            },
-                            {
-                                "depth": 3,
-                                "description": "Result",
-                                "id": 186,
-                                "type": "BasicOperatorByteArray"
-                            }
-                        ],
-                        "edges": {
-                            "0": [
-                                "44"
-                            ],
-                            "44": [
-                                "154"
-                            ],
-                            "154": [
-                                "186"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "description": "Before logical optimization...",
-                    "ruleName": "logicaloptimizationPackageDescription",
-                    "operatorGraph": {
-                        "nodes": [
-                            {
-                                "depth": 0,
-                                "description": "MemoryIndexRoot",
-                                "id": 0,
-                                "type": "BasicOperatorByteArray"
-                            },
-                            {
-                                "depth": 1,
-                                "description": "Memory Index Scan on\nTriplePattern (?s, ?p, ?o)",
-                                "id": 44,
-                                "type": "BasicOperatorByteArray"
-                            },
-                            {
-                                "depth": 2,
-                                "description": "Limit 10",
-                                "id": 154,
-                                "type": "BasicOperatorByteArray"
-                            },
-                            {
-                                "depth": 3,
-                                "description": "Result",
-                                "id": 186,
-                                "type": "BasicOperatorByteArray"
-                            }
-                        ],
-                        "edges": {
-                            "0": [
-                                "44"
-                            ],
-                            "44": [
-                                "154"
-                            ],
-                            "154": [
-                                "186"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "description": "After optimizing the join order...",
-                    "ruleName": "optimizingjoinord;erRule",
-                    "operatorGraph": {
-                        "nodes": [
-                            {
-                                "depth": 0,
-                                "description": "MemoryIndexRoot",
-                                "id": 0,
-                                "type": "BasicOperatorByteArray"
-                            },
-                            {
-                                "depth": 1,
-                                "description": "Memory Index Scan on\nTriplePattern (?s, ?p, ?o)",
-                                "id": 44,
-                                "type": "BasicOperatorByteArray"
-                            },
-                            {
-                                "depth": 2,
-                                "description": "Limit 10",
-                                "id": 154,
-                                "type": "BasicOperatorByteArray"
-                            },
-                            {
-                                "depth": 3,
-                                "description": "Result",
-                                "id": 186,
-                                "type": "BasicOperatorByteArray"
-                            }
-                        ],
-                        "edges": {
-                            "0": [
-                                "44"
-                            ],
-                            "44": [
-                                "154"
-                            ],
-                            "154": [
-                                "186"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "description": "After physical optimization...",
-                    "ruleName": "physicaloptimizationRule",
-                    "operatorGraph": {
-                        "nodes": [
-                            {
-                                "depth": 0,
-                                "description": "MemoryIndexRoot",
-                                "id": 0,
-                                "type": "BasicOperatorByteArray"
-                            },
-                            {
-                                "depth": 1,
-                                "description": "Memory Index Scan on\nTriplePattern (?s, ?p, ?o)",
-                                "id": 44,
-                                "type": "BasicOperatorByteArray"
-                            },
-                            {
-                                "depth": 2,
-                                "description": "Limit 10",
-                                "id": 154,
-                                "type": "BasicOperatorByteArray"
-                            },
-                            {
-                                "depth": 3,
-                                "description": "Result",
-                                "id": 186,
-                                "type": "BasicOperatorByteArray"
-                            }
-                        ],
-                        "edges": {
-                            "0": [
-                                "44"
-                            ],
-                            "44": [
-                                "154"
-                            ],
-                            "154": [
-                                "186"
-                            ]
-                        }
-                    }
-                }
+```
+{
+  "prefix": {
+    "names": [],
+    "pre-defined": {
+      "<http://www.w3.org/2000/01/rdf-schema#>": "rdfs",
+      "<http://www.w3.org/1999/02/22-rdf-syntax-ns#>": "rdf",
+      "<http://www.w3.org/2005/xpath-functions#>": "fn",
+      "<http://www.w3.org/2001/XMLSchema#>": "xsd"
+    },
+    "prefixes": {}
+  },
+  "optimization": {
+    "steps": [
+      {
+        "ruleName": "correctoperatorgraphPackageDescription",
+        "description": "Before a possible correction of the operator graph...",
+        "operatorGraph": {
+          "edges": {
+            "0": [
+              {
+                "operandPosition": 0,
+                "nodeId": "44"
+              }
+            ],
+            "44": [
+              {
+                "operandPosition": 0,
+                "nodeId": "154"
+              }
+            ],
+            "154": [
+              {
+                "operandPosition": 0,
+                "nodeId": "186"
+              }
             ]
-        },
-        "prefix": {
-            "pre-defined": {
-                "<http://www.w3.org/2001/XMLSchema#>": "xsd",
-                "<http://www.w3.org/1999/02/22-rdf-syntax-ns#>": "rdf",
-                "<http://www.w3.org/2005/xpath-functions#>": "fn",
-                "<http://www.w3.org/2000/01/rdf-schema#>": "rdfs"
+          },
+          "nodes": [
+            {
+              "id": 0,
+              "description": "MemoryIndexRoot",
+              "type": "BasicOperatorByteArray",
+              "depth": 0
             },
-            "prefixes": {},
-            "names": []
+            {
+              "id": 44,
+              "description": "Memory Index Scan on\nTriplePattern (?s, ?p, ?o)",
+              "type": "BasicOperatorByteArray",
+              "depth": 1
+            },
+            {
+              "id": 154,
+              "description": "Limit 10",
+              "type": "BasicOperatorByteArray",
+              "depth": 2
+            },
+            {
+              "id": 186,
+              "description": "Result",
+              "type": "BasicOperatorByteArray",
+              "depth": 3
+            }
+          ]
         }
-    }    
+      },
+      {
+        "ruleName": "logicaloptimizationPackageDescription",
+        "description": "Before logical optimization...",
+        "operatorGraph": {
+          "edges": {
+            "0": [
+              {
+                "operandPosition": 0,
+                "nodeId": "44"
+              }
+            ],
+            "44": [
+              {
+                "operandPosition": 0,
+                "nodeId": "154"
+              }
+            ],
+            "154": [
+              {
+                "operandPosition": 0,
+                "nodeId": "186"
+              }
+            ]
+          },
+          "nodes": [
+            {
+              "id": 0,
+              "description": "MemoryIndexRoot",
+              "type": "BasicOperatorByteArray",
+              "depth": 0
+            },
+            {
+              "id": 44,
+              "description": "Memory Index Scan on\nTriplePattern (?s, ?p, ?o)",
+              "type": "BasicOperatorByteArray",
+              "depth": 1
+            },
+            {
+              "id": 154,
+              "description": "Limit 10",
+              "type": "BasicOperatorByteArray",
+              "depth": 2
+            },
+            {
+              "id": 186,
+              "description": "Result",
+              "type": "BasicOperatorByteArray",
+              "depth": 3
+            }
+          ]
+        }
+      },
+      {
+        "ruleName": "optimizingjoinord;erRule",
+        "description": "After optimizing the join order...",
+        "operatorGraph": {
+          "edges": {
+            "0": [
+              {
+                "operandPosition": 0,
+                "nodeId": "44"
+              }
+            ],
+            "44": [
+              {
+                "operandPosition": 0,
+                "nodeId": "154"
+              }
+            ],
+            "154": [
+              {
+                "operandPosition": 0,
+                "nodeId": "186"
+              }
+            ]
+          },
+          "nodes": [
+            {
+              "id": 0,
+              "description": "MemoryIndexRoot",
+              "type": "BasicOperatorByteArray",
+              "depth": 0
+            },
+            {
+              "id": 44,
+              "description": "Memory Index Scan on\nTriplePattern (?s, ?p, ?o)",
+              "type": "BasicOperatorByteArray",
+              "depth": 1
+            },
+            {
+              "id": 154,
+              "description": "Limit 10",
+              "type": "BasicOperatorByteArray",
+              "depth": 2
+            },
+            {
+              "id": 186,
+              "description": "Result",
+              "type": "BasicOperatorByteArray",
+              "depth": 3
+            }
+          ]
+        }
+      },
+      {
+        "ruleName": "physicaloptimizationRule",
+        "description": "After physical optimization...",
+        "operatorGraph": {
+          "edges": {
+            "0": [
+              {
+                "operandPosition": 0,
+                "nodeId": "44"
+              }
+            ],
+            "44": [
+              {
+                "operandPosition": 0,
+                "nodeId": "154"
+              }
+            ],
+            "154": [
+              {
+                "operandPosition": 0,
+                "nodeId": "186"
+              }
+            ]
+          },
+          "nodes": [
+            {
+              "id": 0,
+              "description": "MemoryIndexRoot",
+              "type": "BasicOperatorByteArray",
+              "depth": 0
+            },
+            {
+              "id": 44,
+              "description": "Memory Index Scan on\nTriplePattern (?s, ?p, ?o)",
+              "type": "BasicOperatorByteArray",
+              "depth": 1
+            },
+            {
+              "id": 154,
+              "description": "Limit 10",
+              "type": "BasicOperatorByteArray",
+              "depth": 2
+            },
+            {
+              "id": 186,
+              "description": "Result",
+              "type": "BasicOperatorByteArray",
+              "depth": 3
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
+```
 
 POST to /nonstandard/rif
 ========================
@@ -915,26 +1037,38 @@ Minimal configuration
                 {
                     "children": [
                         {
+                            "id": 1227773968,
+                            "operandPosition": 0,
                             "description": "?Item",
                             "type": "RuleVariable"
                         },
                         {
+                            "id": 26716153,
+                            "operandPosition": 1,
                             "description": "?Buyer",
                             "type": "RuleVariable"
                         },
                         {
+                            "id": 194301248,
+                            "operandPosition": 2,
                             "description": "?Seller",
                             "type": "RuleVariable"
                         },
                         {
+                            "id": 1445931696,
+                            "operandPosition": 3,
                             "description": "<http://example.com/concepts#buy>(?Buyer, ?Item, ?Seller))",
                             "type": "RulePredicate"
                         },
                         {
+                            "id": 849065220,
+                            "operandPosition": 4,
                             "description": "<http://example.com/concepts#sell>(?Seller, ?Item, ?Buyer))",
                             "type": "RulePredicate"
                         }
                     ],
+                    "id": 1259760240,
+                    "operandPosition": 0,
                     "description": "<http://example.com/concepts#buy>(?Buyer, ?Item, ?Seller))",
                     "type": "Rule"
                 }
