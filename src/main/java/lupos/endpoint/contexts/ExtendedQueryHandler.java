@@ -5,12 +5,7 @@ import java.io.OutputStream;
 import java.util.HashSet;
 import java.util.Set;
 
-import lupos.datastructures.items.literal.AnonymousLiteral;
-import lupos.datastructures.items.literal.LanguageTaggedLiteral;
-import lupos.datastructures.items.literal.LazyLiteral;
 import lupos.datastructures.items.literal.Literal;
-import lupos.datastructures.items.literal.TypedLiteral;
-import lupos.datastructures.items.literal.URILiteral;
 import lupos.datastructures.queryresult.GraphResult;
 import lupos.datastructures.queryresult.QueryResult;
 import lupos.endpoint.EvaluationHelper;
@@ -19,7 +14,6 @@ import lupos.endpoint.EvaluationHelper.SPARQLINFERENCE;
 import lupos.endpoint.EvaluationHelper.SPARQLINFERENCEMATERIALIZATION;
 import lupos.endpoint.server.Endpoint;
 import lupos.endpoint.server.format.Formatter;
-import lupos.endpoint.server.format.HeadBodyFormatter;
 import lupos.endpoint.server.format.JSONFormatter;
 import lupos.misc.Triple;
 import lupos.misc.Tuple;
@@ -221,13 +215,9 @@ public class ExtendedQueryHandler implements HttpHandler {
 						OutputStream osPredicate = new ByteArrayOutputStream();
 						OutputStream osObject = new ByteArrayOutputStream();
 						
-// TODO: Uncomment, when HeadBodyFormatter.writeLiteral(...) is public
-//						jsonFormatter.writeLiteral(osSubject, triple.getSubject());
-//						jsonFormatter.writeLiteral(osPredicate, triple.getPredicate());
-//						jsonFormatter.writeLiteral(osObject, triple.getObject());
-						this.writeLiteral(osSubject, triple.getSubject(), jsonFormatter);
-						this.writeLiteral(osPredicate, triple.getPredicate(), jsonFormatter);
-						this.writeLiteral(osObject, triple.getObject(), jsonFormatter);
+						jsonFormatter.writeLiteral(osSubject, triple.getSubject());
+						jsonFormatter.writeLiteral(osPredicate, triple.getPredicate());
+						jsonFormatter.writeLiteral(osObject, triple.getObject());
 
 						tripleJson.put("subject", new JSONObject('{' + osSubject.toString() + '}'));
 						tripleJson.put("predicate", new JSONObject('{' + osPredicate.toString() + '}'));
@@ -242,17 +232,13 @@ public class ExtendedQueryHandler implements HttpHandler {
 						JSONObject predicateJson = new JSONObject();
 						
 						OutputStream osLiteralName = new ByteArrayOutputStream();
-// TODO: Uncomment, when HeadBodyFormatter.writeLiteral(...) is public
-//						jsonFormatter.writeLiteral(osLiteralName, predicate.getName());
-						this.writeLiteral(osLiteralName, predicate.getName(), jsonFormatter);
+						jsonFormatter.writeLiteral(osLiteralName, predicate.getName());
 						
 						predicateJson.put("predicateName", new JSONObject('{' + osLiteralName.toString() + '}'));
 						
 						for (Literal parameter : predicate.getParameters()) {
 							OutputStream osParameter = new ByteArrayOutputStream();
-// TODO: Uncomment, when HeadBodyFormatter.writeLiteral(...) is public
-//							jsonFormatter.writeLiteral(osParameter, parameter);
-							this.writeLiteral(osParameter, parameter, jsonFormatter);
+							jsonFormatter.writeLiteral(osParameter, parameter);
 							predicateJson.append("parameters", new JSONObject('{' + osParameter.toString() + '}'));
 						}
 						
@@ -279,30 +265,6 @@ public class ExtendedQueryHandler implements HttpHandler {
 	private void setDefaultHeaders(HttpExchange t) {
 		t.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
 		t.getResponseHeaders().add("Content-Type", "application/json");
-	}
-	
-	
-	// TODO: Remove, when HeadBodyFormatter.writeLiteral(...) is public
-	// Temporary
-	private void writeLiteral(final OutputStream os, final Literal literal, HeadBodyFormatter formatter) throws IOException {
-		if(literal!=null){
-			final Literal materializedLiteral = (literal instanceof LazyLiteral)?((LazyLiteral)literal).getLiteral(): literal;
-			if (materializedLiteral.isBlank()){
-				formatter.writeBlankNode(os, (AnonymousLiteral) materializedLiteral);
-			} else if(materializedLiteral.isURI()){
-				formatter.writeURI(os, (URILiteral) materializedLiteral);
-			} else {
-				// literal => <literal>
-				if(materializedLiteral instanceof TypedLiteral){
-					formatter.writeTypedLiteral(os, (TypedLiteral)materializedLiteral);
-				} else
-					if(materializedLiteral instanceof LanguageTaggedLiteral){
-						formatter.writeLanguageTaggedLiteral(os, (LanguageTaggedLiteral)materializedLiteral);
-					} else {
-						formatter.writeSimpleLiteral(os, materializedLiteral);
-					}
-			}
-		}
 	}
 }
 
